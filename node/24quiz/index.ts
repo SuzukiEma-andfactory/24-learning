@@ -46,8 +46,10 @@ import * as fs from 'fs';
 // TLE x 0
 // RE x 0
 
-// ts-node: TypeScript のファイルを直接実行するためのツールです。
-// 通常、TypeScriptはJavaScriptにコンパイルされてから実行されますが、ts-node を使うと、TypeScriptファイルをコンパイルする必要なく、その場で実行でき
+// ts-node: TypeScript のファイルを直接実行するためのツール
+// 通常、TypeScriptはJavaScriptにコンパイルされてから実行されますが、ts-node を使うと、TypeScriptファイルをコンパイルする必要なく、その場で実行できる
+// npx ts-node 24quiz/index.ts > out.txtでターミナルで入力した結果をout.txtに新規保存することも可能
+// ターミナル使う時catコマンド使えるかも
 
 // AtCoder用
 // 入力を行ごとに分割して配列にする
