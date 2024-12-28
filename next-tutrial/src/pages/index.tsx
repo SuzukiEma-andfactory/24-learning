@@ -1,7 +1,6 @@
 import localFont from 'next/font/local';
 import Image from 'next/image';
-import cat from '/public/cat.jpg';
-import cat_mobile from '/public/cat_mobile.jpg';
+import Link from 'next/link';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -14,6 +13,8 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
+let id: number = 1;
+
 export default function Home() {
   return (
     <div
@@ -21,8 +22,14 @@ export default function Home() {
     >
       <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'>
         {/* 768px以上の時のみ表示 */}
-        <Image src={cat} alt='cat1' />
-        <Image src={cat_mobile} alt='cat2' className='hidden md:block' />
+        {/* <Image src={cat} alt='cat1' />
+        <Image src={cat_mobile} alt='cat2' className='hidden md:block' /> */}
+
+        {/* ナビゲーション */}
+        {/* 静的パス */}
+        <Link href='/about'>About</Link>
+        {/* 動的パス */}
+        <Link href={`/about/${id}`}>About/id</Link>
       </main>
       <footer className='row-start-3 flex gap-6 flex-wrap items-center justify-center'>
         <a
