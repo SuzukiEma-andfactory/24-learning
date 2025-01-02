@@ -1,6 +1,7 @@
 import localFont from 'next/font/local';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -13,9 +14,14 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
-let id: number = 1;
-
 export default function Home() {
+  let id: number = 1;
+  const router = useRouter();
+
+  const handleUrlUpdate = () => {
+    router.push('/?category=10', undefined, { shallow: true });
+  };
+
   return (
     <div
       className={`${geistSans.variable} ${geistMono.variable} grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]`}
@@ -30,6 +36,10 @@ export default function Home() {
         <Link href='/about'>About</Link>
         {/* 動的パス */}
         <Link href={`/about/${id}`}>About/id</Link>
+        {/* ext/routerでの画面遷移 */}
+        <button onClick={() => router.push('/about')}>About</button>
+        {/* ページは置き換えられずURLを変更 */}
+        <button onClick={handleUrlUpdate}>画面遷移なしでURL更新</button>
       </main>
       <footer className='row-start-3 flex gap-6 flex-wrap items-center justify-center'>
         <a
