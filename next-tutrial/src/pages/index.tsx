@@ -1,8 +1,7 @@
 import List from '@/component/List';
 import localFont from 'next/font/local';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import { fetchPokemonList } from './api/poke-rest';
+import usePokemonData from './api/poke-rest';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -15,34 +14,15 @@ const geistMono = localFont({
   weight: '100 900',
 });
 
-// export async function getServerSideProps() {
-//   // pokemonDataList?.results が undefined の場合は空の配列 [] を代わりに渡す
-//   const pokemons = (await fetchPokemonList()) || [];
-
-//   return {
-//     props: { pokemons },
-//   };
-// }
-
 export default function Home() {
   let id: number = 1;
   const router = useRouter();
 
-  const handleUrlUpdate = () => {
-    router.push('/?category=10', undefined, { shallow: true });
-  };
+  // const handleUrlUpdate = () => {
+  //   router.push('/?category=10', undefined, { shallow: true });
+  // };
 
-  const [pokemons, setPokemons] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchPokemonList();
-      setPokemons(data);
-    };
-
-    fetchData();
-    console.log('Pokemons in Home:', pokemons); // デバッグ用
-  }, [fetchPokemonList]);
+  const pokemonData = usePokemonData();
 
   return (
     // <div
@@ -65,7 +45,7 @@ export default function Home() {
     //   </main>
     // </div>
     <div>
-      <List items={pokemons}></List>
+      <List items={pokemonData}></List>
     </div>
   );
 }
