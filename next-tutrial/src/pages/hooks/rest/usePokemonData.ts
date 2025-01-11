@@ -24,7 +24,7 @@ export const usePokemonData = (limit?: number, detail?: boolean) => {
             const res = await fetch(pokemon.url);
             // ポケモンのタイプ、重さ、能力の情報
             const details = await res.json();
-                        console.log('🟦', details);
+            console.log('🟦', details);
 
             // 日本語の名前を取得するのに必要
             // fetch関数、json関数はPromise（非同期処理の進行状況を管理するオブジェクト）を返す

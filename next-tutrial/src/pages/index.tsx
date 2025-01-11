@@ -1,7 +1,7 @@
 import List from '@/component/List';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
-import usePokemonData from './api/poke-rest';
+import usePokemonData from './hooks/rest/usePokemonData';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -26,8 +26,6 @@ export default function Home() {
   //   router.push('/?category=10', undefined, { shallow: true });
   // };
 
-  const { query } = router;
-  const page = query.page ? parseInt(query.page as string, 10) : 1;
   const limit = 99;
   const { pokemonList } = usePokemonData(limit);
 

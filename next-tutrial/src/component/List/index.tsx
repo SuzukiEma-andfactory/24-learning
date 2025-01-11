@@ -1,4 +1,4 @@
-import { PokemonData } from '@/pages/api/poke-rest';
+import { PokemonData } from '@/pages/hooks/rest/usePokemonData';
 import Component from './component';
 
 const List = ({ items }: { items: PokemonData[] }) => {
