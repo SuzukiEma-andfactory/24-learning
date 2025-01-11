@@ -13,7 +13,7 @@ export const usePokemonData = () => {
       try {
         // ポケモン一覧取得
         const response = await fetch(
-          `https://pokeapi.co/api/v2/pokemon?limit=10`
+          `https://pokeapi.co/api/v2/pokemon?limit=30`
         );
         const data = await response.json();
 
@@ -29,6 +29,8 @@ export const usePokemonData = () => {
             const speciesRes = await fetch(details.species.url).then((res) =>
               res.json()
             );
+
+            console.log('🟦', speciesRes)
 
             return {
               // 日本語の名前を取得

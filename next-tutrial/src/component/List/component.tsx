@@ -1,9 +1,10 @@
 import Image from 'next/image';
+import * as Styled from './styled';
 
 const Component = ({ items }: any) => {
   return (
     <>
-      <ul>
+      <Styled.MuiGridList columns={3}>
         {items ? (
           items.map((item: any) => (
             <li key={item.name}>
@@ -23,7 +24,7 @@ const Component = ({ items }: any) => {
         ) : (
           <p>ポケモンは見つかりませんでした</p>
         )}
-      </ul>
+      </Styled.MuiGridList>
     </>
   );
 };
