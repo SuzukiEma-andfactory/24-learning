@@ -2,7 +2,7 @@ const Component = () => {
   return (
     <>
       <div>
-        <p></p>
+        <p>s</p>
       </div>
     </>
   );

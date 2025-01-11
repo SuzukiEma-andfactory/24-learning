@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 export type PokemonData = {
   name: string;
   image: string;
+  url: string;
 };
 
 export const usePokemonIndex = (limit?: number, detail?: boolean) => {
@@ -24,8 +25,7 @@ export const usePokemonIndex = (limit?: number, detail?: boolean) => {
             const res = await fetch(pokemon.url);
             // ポケモンのタイプ、重さ、能力の情報
             const details = await res.json();
-            console.log('🟦', details);
-
+            // console.log('🟦', details);
             // 日本語の名前を取得するのに必要
             // fetch関数、json関数はPromise（非同期処理の進行状況を管理するオブジェクト）を返す
             // 非同期処理の完了前、namesにアクセス不可なので処理の完了待機する（await）必要がある
@@ -42,6 +42,7 @@ export const usePokemonIndex = (limit?: number, detail?: boolean) => {
                 details.sprites.other['official-artwork'].front_default ||
                 // ドット絵
                 details.sprites.front_default,
+              url: details.species.url,
             };
           })
         );
@@ -54,8 +55,6 @@ export const usePokemonIndex = (limit?: number, detail?: boolean) => {
 
     fetchPokemonData();
   }, []);
-
-  useEffect(() => {}, [pokemonList, pokemonDetails]);
 
   return { pokemonList, pokemonDetails };
 };

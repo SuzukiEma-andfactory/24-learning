@@ -1,9 +1,10 @@
-import usePokemonIndex from '@/pages/hooks/rest/usePokemonIndex';
+import { usePokemonContext } from '@/context/PokemonContext';
+import usePokemonDetails from '@/pages/hooks/rest/usePokemonDetails';
 import Component from './component';
 
 const PokemonDetail = () => {
-  const { pokemonList } = usePokemonIndex(undefined, true);
-  // console.log('🟦', pokemonList)
+  const { selectedPokemonUrl } = usePokemonContext();
+  const { pokemonDetail } = usePokemonDetails(selectedPokemonUrl);
 
   return <Component />;
 };
