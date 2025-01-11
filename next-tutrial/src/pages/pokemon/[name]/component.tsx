@@ -1,5 +1,6 @@
 import { usePokemonContext } from '@/context/PokemonContext';
 import usePokemonDetails from '@/hooks/rest/usePokemonDetails';
+import { StyledContainer } from './styled';
 
 const Component = () => {
   const { selectedPokemonImage, selectedPokemonUrl } = usePokemonContext();
@@ -8,7 +9,7 @@ const Component = () => {
 
   return (
     <>
-      <div>
+      <StyledContainer>
         <p>{pokemonDetail?.name}</p>
         <img
           src={selectedPokemonImage || ''}
@@ -19,7 +20,7 @@ const Component = () => {
         <p>タイプ：{pokemonDetail?.type}</p>
         <p>遭遇率：{pokemonDetail?.encount}%</p>
         <p>捕獲率：{pokemonDetail?.capture_rate}%</p>
-      </div>
+      </StyledContainer>
     </>
   );
 };
