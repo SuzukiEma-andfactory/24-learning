@@ -1,7 +1,7 @@
 import List from '@/component/List';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
-import usePokemonData from './hooks/rest/usePokemonData';
+import usePokemonIndex from './hooks/rest/usePokemonIndex';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -27,7 +27,7 @@ export default function Home() {
   // };
 
   const limit = 99;
-  const { pokemonList } = usePokemonData(limit);
+  const { pokemonList } = usePokemonIndex(limit);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,

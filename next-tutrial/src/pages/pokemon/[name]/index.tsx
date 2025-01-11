@@ -1,8 +1,8 @@
-import usePokemonData from '@/pages/hooks/rest/usePokemonData';
+import usePokemonIndex from '@/pages/hooks/rest/usePokemonIndex';
 import Component from './component';
 
 const PokemonDetail = () => {
-  const { pokemonList } = usePokemonData(undefined, true);
+  const { pokemonList } = usePokemonIndex(undefined, true);
   // console.log('🟦', pokemonList)
 
   return <Component />;

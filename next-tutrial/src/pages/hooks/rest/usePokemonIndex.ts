@@ -5,7 +5,7 @@ export type PokemonData = {
   image: string;
 };
 
-export const usePokemonData = (limit?: number, detail?: boolean) => {
+export const usePokemonIndex = (limit?: number, detail?: boolean) => {
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
   const [pokemonDetails, setPokemonDetails] = useState<PokemonData>();
 
@@ -60,4 +60,4 @@ export const usePokemonData = (limit?: number, detail?: boolean) => {
   return { pokemonList, pokemonDetails };
 };
 
-export default usePokemonData;
+export default usePokemonIndex;

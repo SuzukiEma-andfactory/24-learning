@@ -1,4 +1,4 @@
-import { PokemonData } from '@/pages/hooks/rest/usePokemonData';
+import { PokemonData } from '@/pages/hooks/rest/usePokemonIndex';
 import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from 'styled-components';
