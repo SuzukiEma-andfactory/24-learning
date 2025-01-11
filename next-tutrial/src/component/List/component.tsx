@@ -1,21 +1,21 @@
-import usePokemonDetails from '@/pages/hooks/rest/usePokemonDetails';
-import { PokemonData } from '@/pages/hooks/rest/usePokemonIndex';
+import { usePokemonContext } from '@/context/PokemonContext';
+import { PokemonData } from '@/hooks/rest/usePokemonIndex';
 import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from 'styled-components';
 import * as Styled from './styled';
-import { usePokemonContext } from '@/context/PokemonContext';
 
 const StyledLink = styled(Link)`
   width: 100%;
 `;
 
 const Component = ({ items }: { items: PokemonData[] }) => {
-  const { setSelectedPokemonUrl, setSelectedPokemonImage } = usePokemonContext();
+  const { setSelectedPokemonUrl, setSelectedPokemonImage } =
+    usePokemonContext();
 
   const handleClick = (url: string, image: string) => {
     setSelectedPokemonUrl(url);
-    setSelectedPokemonImage(image)
+    setSelectedPokemonImage(image);
   };
 
   return (

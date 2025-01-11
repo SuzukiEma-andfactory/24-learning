@@ -1,5 +1,5 @@
 import { usePokemonContext } from '@/context/PokemonContext';
-import usePokemonDetails from '@/pages/hooks/rest/usePokemonDetails';
+import usePokemonDetails from '@/hooks/rest/usePokemonDetails';
 
 const Component = () => {
   const { selectedPokemonImage, selectedPokemonUrl } = usePokemonContext();
