@@ -5,8 +5,9 @@ export type PokemonData = {
   image: string;
 };
 
-export const usePokemonData = (limit: number) => {
+export const usePokemonData = (limit?: number, detail?: boolean) => {
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
+  const [pokemonDetails, setPokemonDetails] = useState<PokemonData>();
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -23,12 +24,16 @@ export const usePokemonData = (limit: number) => {
             const res = await fetch(pokemon.url);
             // ポケモンのタイプ、重さ、能力の情報
             const details = await res.json();
+                        console.log('🟦', details);
+
             // 日本語の名前を取得するのに必要
             // fetch関数、json関数はPromise（非同期処理の進行状況を管理するオブジェクト）を返す
             // 非同期処理の完了前、namesにアクセス不可なので処理の完了待機する（await）必要がある
             const speciesRes = await fetch(details.species.url).then((res) =>
               res.json()
             );
+
+            setPokemonDetails(speciesRes);
 
             return {
               // 日本語の名前を取得
@@ -50,11 +55,9 @@ export const usePokemonData = (limit: number) => {
     fetchPokemonData();
   }, []);
 
-  useEffect(() => {
-    console.log('🟦', pokemonList);
-  }, [pokemonList]);
+  useEffect(() => {}, [pokemonList, pokemonDetails]);
 
-  return { pokemonList };
+  return { pokemonList, pokemonDetails };
 };
 
 export default usePokemonData;
