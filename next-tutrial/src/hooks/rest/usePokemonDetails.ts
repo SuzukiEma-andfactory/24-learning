@@ -28,7 +28,7 @@ export const usePokemonDetails = (url: string | null) => {
       };
 
       setPokemonDetail(pokemonDetail);
-      console.log('🟣', pokemonDetail);
+      // console.log('🟣', pokemonDetail);
     } catch (err) {
       console.error('ポケモンデータの取得に失敗しました:', err);
     }

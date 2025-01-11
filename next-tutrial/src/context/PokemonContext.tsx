@@ -23,9 +23,9 @@ export const PokemonProvider = ({ children }: { children: ReactNode }) => {
     null
   );
 
-  useEffect(() => {
-    console.log('🩷', selectedPokemonUrl, selectedPokemonImage);
-  }, [selectedPokemonUrl]);
+  // useEffect(() => {
+  //   console.log('🩷', selectedPokemonUrl, selectedPokemonImage);
+  // }, [selectedPokemonUrl]);
 
   return (
     <PokemonContext.Provider
