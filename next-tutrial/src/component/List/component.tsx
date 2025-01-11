@@ -1,12 +1,13 @@
 import Image from 'next/image';
 import * as Styled from './styled';
+import { PokemonData } from '@/pages/api/poke-rest';
 
-const Component = ({ items }: any) => {
+const Component = ({ items }: { items: PokemonData[] }) => {
   return (
     <>
       <Styled.MuiGridList columns={3}>
         {items ? (
-          items.map((item: any) => (
+          items.map((item: PokemonData) => (
             <li key={item.name}>
               <p>{item.name}</p>
               {item.image ? (

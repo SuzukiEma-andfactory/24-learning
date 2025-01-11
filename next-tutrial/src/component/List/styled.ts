@@ -1,5 +1,4 @@
 import { styled as muiStyled } from '@mui/material/styles';
-import styled from 'styled-components';
 
 type GridColumnProps = {
   columns: number;
@@ -12,7 +11,6 @@ export const MuiGridList = muiStyled('ul')<GridColumnProps>(({ columns }) => ({
   textAlign: 'center',
   gap: '16px',
   listStyle: 'none',
-  padding: '40px',
   margin: '0 auto',
   maxWidth: '800px',
 
