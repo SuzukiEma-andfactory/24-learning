@@ -1,6 +1,6 @@
 import { usePokemonContext } from '@/context/PokemonContext';
-import usePokemonDetails from '@/hooks/rest/usePokemonDetails';
 import { StyledContainer } from './styled';
+import usePokemonDetails from '@/pages/hooks/rest/usePokemonDetails';
 
 const Component = () => {
   const { selectedPokemonImage, selectedPokemonUrl } = usePokemonContext();

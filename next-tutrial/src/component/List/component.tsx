@@ -1,5 +1,5 @@
 import { usePokemonContext } from '@/context/PokemonContext';
-import { PokemonData } from '@/hooks/rest/usePokemonIndex';
+import { PokemonData } from '@/pages/hooks/rest/usePokemonIndex';
 import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from 'styled-components';

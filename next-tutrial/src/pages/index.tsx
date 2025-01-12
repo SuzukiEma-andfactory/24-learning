@@ -1,7 +1,7 @@
 import List from '@/component/List';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
-import usePokemonIndex from '../hooks/rest/usePokemonIndex';
+import usePokemonIndex from './hooks/rest/usePokemonIndex';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
