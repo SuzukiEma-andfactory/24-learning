@@ -1,5 +1,4 @@
-import { usePokemonContext } from '@/context/PokemonContext';
-import { PokemonData } from '@/pages/hooks/rest/usePokemonIndex';
+import { PokemonData } from '@/hooks/rest/usePokemonIndex';
 import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from 'styled-components';
@@ -10,24 +9,12 @@ const StyledLink = styled(Link)`
 `;
 
 const Component = ({ items }: { items: PokemonData[] }) => {
-  const { setSelectedPokemonUrl, setSelectedPokemonImage } =
-    usePokemonContext();
-
-  const handleClick = (url: string, image: string) => {
-    setSelectedPokemonUrl(url);
-    setSelectedPokemonImage(image);
-  };
-
   return (
     <>
       <Styled.MuiGridList columns={3}>
         {items ? (
-          items.map((item: PokemonData) => (
-            <StyledLink
-              href={`/pokemon/${item.name}`}
-              key={item.name}
-              onClick={() => handleClick(item.url, item.image)}
-            >
+          items.map((item: PokemonData, index: number) => (
+            <StyledLink href={`/pokemon/${index}`} key={index}>
               <li key={item.url}>
                 <p>{item.name}</p>
                 {item.image ? (

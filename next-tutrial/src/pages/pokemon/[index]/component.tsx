@@ -1,25 +1,29 @@
 import { usePokemonContext } from '@/context/PokemonContext';
+import { PokemonDetailProps } from '.';
 import { StyledContainer } from './styled';
-import usePokemonDetails from '@/pages/hooks/rest/usePokemonDetails';
 
-const Component = () => {
+const Component = (pokemonDetail: PokemonDetailProps) => {
   const { selectedPokemonImage, selectedPokemonUrl } = usePokemonContext();
-  const { pokemonDetail } = usePokemonDetails(selectedPokemonUrl);
+  // const { pokemonDetail } = usePokemonDetails(selectedPokemonUrl);
   const imageSize = 240;
+  const { name, image, type, encount, capture_rate } = pokemonDetail;
+
+  console.log('🟦', pokemonDetail, );
 
   return (
     <>
       <StyledContainer>
-        <p>{pokemonDetail?.name}</p>
+        {/* <p>{name}</p>
         <img
           src={selectedPokemonImage || ''}
           alt=''
           width={imageSize}
           height={imageSize}
         />
-        <p>タイプ：{pokemonDetail?.type}</p>
-        <p>遭遇率：{pokemonDetail?.encount}%</p>
-        <p>捕獲率：{pokemonDetail?.capture_rate}%</p>
+        <p>タイプ：{type}</p>
+        <p>遭遇率：{encount}%</p>
+        <p>捕獲率：{capture_rate}%</p> */}
+        <p></p>
       </StyledContainer>
     </>
   );

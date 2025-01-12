@@ -1,46 +1,64 @@
 import { useEffect, useState } from 'react';
 
-export type PokemonDetail = {
+export type PokemonDetailProps = {
   name: string;
   image?: string;
-  encount: string;
-  type: string[];
-  capture_rate: number;
+  types: string[];
   abilities?: string[];
 };
 
-export const usePokemonDetails = (url: string | null) => {
-  const [pokemonDetail, setPokemonDetail] = useState<PokemonDetail | null>(
-    null
-  );
-  const [apiUrl, setApiUrl] = useState<string | null>(url);
-
-  const fetchPokemonDetails = async (url: string) => {
-    try {
-      const res = await fetch(url);
-      const details = await res.json();
-
-      const pokemonDetail = {
-        name: details.names[0].name,
-        type: details.genera[0].genus,
-        encount: details.pal_park_encounters[0].rate,
-        capture_rate: details.capture_rate,
-      };
-
-      setPokemonDetail(pokemonDetail);
-      // console.log('🟣', pokemonDetail);
-    } catch (err) {
-      console.error('ポケモンデータの取得に失敗しました:', err);
-    }
-  };
-
-  useEffect(() => {
-    if (apiUrl) {
-      fetchPokemonDetails(apiUrl);
-    }
-  }, [apiUrl]);
-
-  return { pokemonDetail, setApiUrl };
+export type IndexProps = {
+  index: string;
 };
 
-export default usePokemonDetails;
+export const useFetchPokemonDetails = (index: IndexProps) => {
+  const [pokemonDetail, setPokemonDetail] = useState<PokemonDetailProps>();
+  const [log, setLog] = useState<string>();
+
+  useEffect(() => {
+    const fetchPokemonDetails = async () => {
+      try {
+        // index がオブジェクトの場合、その値を取得
+        const indexValue = typeof index === 'string' ? index : index.index;
+        const url = `https://pokeapi.co/api/v2/pokemon/${indexValue}/`;
+
+        console.log('url', url);
+        console.log('value', indexValue);
+
+        const res = await fetch(url);
+        if (!res.ok) {
+          const errorText = await res.text();
+          throw new Error(`Failed to fetch Pokémon details: ${errorText}`);
+        }
+
+        const details = await res.json();
+        setLog(`https://pokeapi.co/api/v2/pokemon/${index}/`);
+
+        const pokemonDetail: PokemonDetailProps = {
+          name: details.name,
+          image:
+            details.sprites.other['official-artwork'].front_default ||
+            details.sprites.front_default,
+          types: details.types.map((type: any) => type.type.name),
+          abilities: details.abilities.map(
+            (ability: any) => ability.ability.name
+          ),
+        };
+
+        setPokemonDetail(pokemonDetail);
+      } catch (err) {
+        if (err instanceof Error) {
+          console.log(err.message);
+        }
+      }
+    };
+
+    fetchPokemonDetails();
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('🩵', index);
+  // }, [index]);
+
+  return { pokemonDetail };
+};
