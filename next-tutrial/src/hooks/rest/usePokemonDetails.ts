@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
 export type PokemonDetailProps = {
-  name: string;
   image?: string;
   types: string[];
   abilities?: string[];
 };
 
 export type PokemonSpeciesDetailProps = {
+  name: string;
   capture_rate: number;
   genera: string;
   habitat: string;
@@ -26,12 +26,12 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
     const fetchPokemonDetails = async () => {
       try {
         // indexはオブジェクトで返ってくるので、index.indexで値を取得
-        const indexValue = typeof index === 'string' ? index : index.index;
+        const id = typeof index === 'string' ? index : index.index;
 
         // 能力、高さ、重さ、画像
-        const url = `https://pokeapi.co/api/v2/pokemon/${indexValue}/`;
+        const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
         // 遭遇率、場所、捕獲率、ジャンル、進化情報
-        const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${indexValue}/`;
+        const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${id}/`;
 
         const res = await fetch(url);
         const speciesRes = await fetch(speciesUrl);
@@ -60,13 +60,12 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
         }
 
         const details = await res.json();
-        const details2 = await speciesRes.json();
+        const speciesdetails = await speciesRes.json();
 
-        // console.log('🔮', details);
-        // console.log('🌈', details2);
+        console.log('🔮', details);
+        console.log('🌈', speciesdetails);
 
         const pokemonDetail: PokemonDetailProps = {
-          name: details.name,
           image:
             details.sprites.other['official-artwork'].front_default ||
             details.sprites.front_default,
@@ -77,9 +76,10 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
         };
 
         const pokemonSpeciesDetail: PokemonSpeciesDetailProps = {
-          capture_rate: details2.capture_rate,
-          genera: details2.genera[0].genus,
-          habitat: details2.habitat.name,
+          name: speciesdetails.names[0].name,
+          capture_rate: speciesdetails.capture_rate,
+          genera: speciesdetails.genera[0].genus,
+          habitat: speciesdetails.habitat.name,
         };
 
         setPokemonDetail(pokemonDetail);
@@ -98,5 +98,5 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
   //   console.log('🩵', pokemonDetail);
   // }, [pokemonDetail]);
 
-  return { pokemonDetail };
+  return { pokemonDetail, pokemonSpeciesDetail };
 };

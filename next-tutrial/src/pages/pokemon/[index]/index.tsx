@@ -5,19 +5,17 @@ import {
 import { GetServerSideProps } from 'next';
 import Component from './component';
 
-export type PokemonDetailProps = {
-  name?: string;
-  image?: string;
-  encount?: string;
-  type?: string[];
-  capture_rate?: number;
-  abilities?: string[];
-};
+const PokemonDetail: React.FC<IndexProps> = (index) => {
+  const { pokemonDetail, pokemonSpeciesDetail } = useFetchPokemonDetails(
+    index as IndexProps
+  );
 
-const PokemonDetail: React.FC<PokemonDetailProps> = (index) => {
-  const { pokemonDetail } = useFetchPokemonDetails(index as IndexProps);
-
-  return <Component {...pokemonDetail} />;
+  return (
+    <Component
+      pokemonDetail={pokemonDetail}
+      pokemonSpeciesDetail={pokemonSpeciesDetail}
+    />
+  );
 };
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
