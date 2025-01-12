@@ -13,8 +13,8 @@ const Component = ({ items }: { items: PokemonData[] }) => {
     <>
       <Styled.MuiGridList columns={3}>
         {items ? (
-          items.map((item: PokemonData, index: number) => (
-            <StyledLink href={`/pokemon/${index}`} key={index}>
+          items.map((item: PokemonData) => (
+            <StyledLink href={`/pokemon/${item.id}`} key={item.id}>
               <li key={item.url}>
                 <p>{item.name}</p>
                 {item.image ? (

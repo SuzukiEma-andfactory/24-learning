@@ -1,4 +1,7 @@
-import { IndexProps, useFetchPokemonDetails } from '@/hooks/rest/usePokemonDetails';
+import {
+  IndexProps,
+  useFetchPokemonDetails,
+} from '@/hooks/rest/usePokemonDetails';
 import { GetServerSideProps } from 'next';
 import Component from './component';
 

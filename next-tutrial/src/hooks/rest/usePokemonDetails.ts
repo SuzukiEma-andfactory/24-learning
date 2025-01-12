@@ -7,32 +7,63 @@ export type PokemonDetailProps = {
   abilities?: string[];
 };
 
+export type PokemonSpeciesDetailProps = {
+  capture_rate: number;
+  genera: string;
+  habitat: string;
+};
+
 export type IndexProps = {
   index: string;
 };
 
 export const useFetchPokemonDetails = (index: IndexProps) => {
   const [pokemonDetail, setPokemonDetail] = useState<PokemonDetailProps>();
-  const [log, setLog] = useState<string>();
+  const [pokemonSpeciesDetail, setpokemonSpeciesDetail] =
+    useState<PokemonSpeciesDetailProps>();
 
   useEffect(() => {
     const fetchPokemonDetails = async () => {
       try {
-        // index がオブジェクトの場合、その値を取得
+        // indexはオブジェクトで返ってくるので、index.indexで値を取得
         const indexValue = typeof index === 'string' ? index : index.index;
-        const url = `https://pokeapi.co/api/v2/pokemon/${indexValue}/`;
 
-        console.log('url', url);
-        console.log('value', indexValue);
+        // 能力、高さ、重さ、画像
+        const url = `https://pokeapi.co/api/v2/pokemon/${indexValue}/`;
+        // 遭遇率、場所、捕獲率、ジャンル、進化情報
+        const speciesUrl = `https://pokeapi.co/api/v2/pokemon-species/${indexValue}/`;
 
         const res = await fetch(url);
-        if (!res.ok) {
-          const errorText = await res.text();
-          throw new Error(`Failed to fetch Pokémon details: ${errorText}`);
+        const speciesRes = await fetch(speciesUrl);
+
+        const checkResponse = async (
+          response: Response,
+          errorMessage: string
+        ) => {
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`${errorMessage}: ${errorText}`);
+          }
+        };
+
+        await checkResponse(res, 'Failed to fetch Pokémon details');
+        await checkResponse(
+          speciesRes,
+          'Failed to fetch Pokémon species details'
+        );
+
+        if (!speciesRes.ok) {
+          const errorText = await speciesRes.text();
+          throw new Error(
+            `Failed to fetch Pokémon species details: ${errorText}`
+          );
         }
 
         const details = await res.json();
-        setLog(`https://pokeapi.co/api/v2/pokemon/${index}/`);
+        const details2 = await speciesRes.json();
+
+        // console.log('🔮', details);
+        // console.log('🌈', details2);
 
         const pokemonDetail: PokemonDetailProps = {
           name: details.name,
@@ -45,7 +76,14 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
           ),
         };
 
+        const pokemonSpeciesDetail: PokemonSpeciesDetailProps = {
+          capture_rate: details2.capture_rate,
+          genera: details2.genera[0].genus,
+          habitat: details2.habitat.name,
+        };
+
         setPokemonDetail(pokemonDetail);
+        setpokemonSpeciesDetail(pokemonSpeciesDetail);
       } catch (err) {
         if (err instanceof Error) {
           console.log(err.message);
@@ -57,8 +95,8 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
   }, []);
 
   // useEffect(() => {
-  //   console.log('🩵', index);
-  // }, [index]);
+  //   console.log('🩵', pokemonDetail);
+  // }, [pokemonDetail]);
 
   return { pokemonDetail };
 };
