@@ -62,8 +62,8 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
         const details = await res.json();
         const speciesdetails = await speciesRes.json();
 
-        console.log('🔮', details);
-        console.log('🌈', speciesdetails);
+        // console.log('🔮', details);
+        // console.log('🌈', speciesdetails);
 
         const pokemonDetail: PokemonDetailProps = {
           image:
