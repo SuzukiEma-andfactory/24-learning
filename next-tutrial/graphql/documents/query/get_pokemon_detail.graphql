@@ -1,0 +1,10 @@
+query GetPokemonDetail($id: Int!) {
+  pokemons: pokemon_v2_pokemonspecies(where: { id: { _eq: $id } }) {
+    id
+    name
+    base_happiness
+    capture_rate
+    is_legendary
+    is_mythical
+  }
+}

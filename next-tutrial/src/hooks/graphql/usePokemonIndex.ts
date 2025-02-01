@@ -10,7 +10,6 @@ export type PokemonData = {
 
 export const usePokemonIndex = (limit?: number, detail?: boolean) => {
   const [pokemonList, setPokemonList] = useState<PokemonData[]>([]);
-  const [pokemonDetails, setPokemonDetails] = useState<PokemonData>();
 
   useEffect(() => {
     const fetchPokemonData = async () => {
@@ -25,14 +24,13 @@ export const usePokemonIndex = (limit?: number, detail?: boolean) => {
           image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemon.id}.png`,
         }));
         setPokemonList(data as PokemonData[]);
-        // console.log('🟦', data);
       });
     };
 
     fetchPokemonData();
   }, []);
 
-  return { pokemonList, pokemonDetails };
+  return { pokemonList };
 };
 
 export default usePokemonIndex;

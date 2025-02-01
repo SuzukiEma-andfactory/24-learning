@@ -58778,12 +58778,31 @@ export type Subscription_RootPokemon_V2_Versionname_StreamArgs = {
   where?: InputMaybe<Pokemon_V2_Versionname_Bool_Exp>;
 };
 
+export type GetPokemonDetailQueryVariables = Exact<{
+  id: Scalars['Int']['input'];
+}>;
+
+
+export type GetPokemonDetailQuery = { __typename?: 'query_root', pokemons: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string, base_happiness?: number | null, capture_rate?: number | null, is_legendary: boolean, is_mythical: boolean }> };
+
 export type GetPokemonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetPokemonsQuery = { __typename?: 'query_root', pokemons: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string }> };
 
 
+export const GetPokemonDetailDocument = gql`
+    query GetPokemonDetail($id: Int!) {
+  pokemons: pokemon_v2_pokemonspecies(where: {id: {_eq: $id}}) {
+    id
+    name
+    base_happiness
+    capture_rate
+    is_legendary
+    is_mythical
+  }
+}
+    `;
 export const GetPokemonsDocument = gql`
     query GetPokemons {
   pokemons: pokemon_v2_pokemonspecies(
@@ -58804,6 +58823,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    GetPokemonDetail(variables: GetPokemonDetailQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPokemonDetailQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetPokemonDetailQuery>(GetPokemonDetailDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPokemonDetail', 'query', variables);
+    },
     GetPokemons(variables?: GetPokemonsQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<GetPokemonsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetPokemonsQuery>(GetPokemonsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetPokemons', 'query', variables);
     }

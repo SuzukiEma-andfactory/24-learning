@@ -14,7 +14,7 @@ export type PokemonSpeciesDetailProps = {
 };
 
 export type IndexProps = {
-  index: string;
+  id: string;
 };
 
 export const useFetchPokemonDetails = (index: IndexProps) => {
@@ -26,7 +26,7 @@ export const useFetchPokemonDetails = (index: IndexProps) => {
     const fetchPokemonDetails = async () => {
       try {
         // indexはオブジェクトで返ってくるので、index.indexで値を取得
-        const id = typeof index === 'string' ? index : index.index;
+        const id = typeof index === 'string' ? index : index.id;
 
         // 能力、高さ、重さ、画像
         const url = `https://pokeapi.co/api/v2/pokemon/${id}/`;
