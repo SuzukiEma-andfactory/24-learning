@@ -1,5 +1,5 @@
 import { GraphQLClient, RequestOptions } from 'graphql-request';
-import gql from 'graphql-tag';
+import { gql } from 'graphql-tag';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -58781,14 +58781,15 @@ export type Subscription_RootPokemon_V2_Versionname_StreamArgs = {
 export type GetPokemonsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetPokemonsQuery = { __typename?: 'query_root', pokemos: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string }> };
+export type GetPokemonsQuery = { __typename?: 'query_root', pokemons: Array<{ __typename?: 'pokemon_v2_pokemonspecies', id: number, name: string }> };
 
 
 export const GetPokemonsDocument = gql`
     query GetPokemons {
-  pokemos: pokemon_v2_pokemonspecies(
+  pokemons: pokemon_v2_pokemonspecies(
     where: {pokemon_v2_generation: {name: {_eq: "generation-iii"}}}
     order_by: {id: asc}
+    limit: 99
   ) {
     id
     name

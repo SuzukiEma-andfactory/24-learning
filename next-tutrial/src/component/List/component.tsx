@@ -1,4 +1,5 @@
-import { PokemonData } from '@/hooks/rest/usePokemonIndex';
+// import { PokemonData } from '@/hooks/rest/usePokemonIndex';
+import { PokemonData } from '@/hooks/graphql/usePokemonIndex';
 import Image from 'next/image';
 import Link from 'next/link';
 import { styled } from 'styled-components';
@@ -11,11 +12,37 @@ const StyledLink = styled(Link)`
 const Component = ({ items }: { items: PokemonData[] }) => {
   return (
     <>
-      <Styled.MuiGridList columns={3}>
+      {/* rest api */}
+      {/* <Styled.MuiGridList columns={3}>
         {items ? (
           items.map((item: PokemonData) => (
             <StyledLink href={`/pokemon/${item.id}`} key={item.id}>
               <li key={item.url}>
+                <p>{item.name}</p>
+                {item.image ? (
+                  <Image
+                    src={`${item.image}` || ''}
+                    alt={item.name}
+                    width={100}
+                    height={100}
+                  />
+                ) : (
+                  <></>
+                )}
+              </li>
+            </StyledLink>
+          ))
+        ) : (
+          <p>ポケモンは見つかりませんでした</p>
+        )}
+      </Styled.MuiGridList> */}
+
+      {/* graphql */}
+      <Styled.MuiGridList columns={3}>
+        {items ? (
+          items.map((item: PokemonData) => (
+            <StyledLink href={`/pokemon/${item.id}`} key={item.id}>
+              <li key={item.id}>
                 <p>{item.name}</p>
                 {item.image ? (
                   <Image

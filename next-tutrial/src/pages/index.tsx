@@ -1,7 +1,7 @@
 import List from '@/component/List';
+import usePokemonIndex from '@/hooks/graphql/usePokemonIndex';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
-import usePokemonIndex from '../hooks/rest/usePokemonIndex';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -26,15 +26,9 @@ export default function Home() {
   //   router.push('/?category=10', undefined, { shallow: true });
   // };
 
-  const limit = 99;
-  const { pokemonList } = usePokemonIndex(limit);
+  // const limit = 99;
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    router.push(`/?page=${value}`, undefined, { shallow: true });
-  };
+  const { pokemonList } = usePokemonIndex();
 
   return (
     // <div
