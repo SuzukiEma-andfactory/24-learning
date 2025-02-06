@@ -11,8 +11,6 @@ export const MuiGridList = muiStyled('ul')<GridColumnProps>(({ columns }) => ({
   textAlign: 'center',
   gap: '16px',
   listStyle: 'none',
-  margin: '0 auto',
-  maxWidth: '800px',
 
   '& li': {
     width: '100%',

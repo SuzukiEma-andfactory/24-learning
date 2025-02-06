@@ -1,4 +1,5 @@
-import List from '@/component/List';
+import Layout from '@/components/Layout';
+import List from '@/components/List';
 import usePokemonIndex from '@/hooks/graphql/usePokemonIndex';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
@@ -50,8 +51,10 @@ export default function Home() {
     //     {/* <button onClick={handleUrlUpdate}>画面遷移なしでURL更新</button> */}
     //   </main>
     // </div>
-    <StyledContainer>
-      <List items={pokemonList}></List>
-    </StyledContainer>
+    <Layout>
+      <StyledContainer>
+        <List items={pokemonList}></List>
+      </StyledContainer>
+    </Layout>
   );
 }
