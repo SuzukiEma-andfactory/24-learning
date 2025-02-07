@@ -58806,9 +58806,9 @@ export const GetPokemonDetailDocument = gql`
 export const GetPokemonsDocument = gql`
     query GetPokemons {
   pokemons: pokemon_v2_pokemonspecies(
-    where: {pokemon_v2_generation: {name: {_eq: "generation-iii"}}}
+    where: {pokemon_v2_generation: {name: {_eq: "generation-i"}}}
     order_by: {id: asc}
-    limit: 99
+    limit: 150
   ) {
     id
     name

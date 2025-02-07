@@ -46,8 +46,8 @@ const Component = ({ pokemonDetail, pokemonSpeciesDetail }: Props) => {
         <p>分類：{pokemonDetail?.base_happiness}</p>
         <p>捕まえやすさ：{pokemonDetail?.capture_rate}</p>
         <p>初期のなつき度：{pokemonDetail?.base_happiness}</p>
-        <p>伝説のポケモン：{pokemonDetail?.is_legendary}</p>
-        <p>幻のポケモン：{pokemonDetail?.is_mythical}</p>
+        <p>伝説のポケモン：{pokemonDetail?.is_legendary ? 'はい' : 'いいえ'}</p>
+        <p>幻のポケモン：{pokemonDetail?.is_mythical ? 'はい' : 'いいえ'}</p>
       </StyledContainer>
     </>
   );

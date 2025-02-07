@@ -41,7 +41,7 @@ export default function Home() {
       </Layout>
 
       {/* スクリプトの読み込みタイミングを指定できる */}
-      <Script
+      {/* <Script
         // ロードするスクリプトのURL（ここではFacebook SDKのURLを使う）
         src='https://connect.facebook.net/en_US/sdk.js'
         // ページの読み込み完了後にスクリプトをロード
@@ -50,7 +50,7 @@ export default function Home() {
         onLoad={() =>
           console.log(`script loaded correctly, window.FB has been populated`)
         }
-      />
+      /> */}
     </>
 
     // <div
