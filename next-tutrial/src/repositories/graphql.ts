@@ -58808,7 +58808,7 @@ export const GetPokemonsDocument = gql`
   pokemons: pokemon_v2_pokemonspecies(
     where: {pokemon_v2_generation: {name: {_eq: "generation-i"}}}
     order_by: {id: asc}
-    limit: 150
+    limit: 155
   ) {
     id
     name

@@ -3,6 +3,8 @@ import {
   // PokemonDetailProps,
   PokemonSpeciesDetailProps,
 } from '@/hooks/rest/usePokemonDetails';
+import { clsx } from 'clsx';
+import styles from './style.module.css';
 import { StyledContainer } from './styled';
 
 // type Props = {
@@ -46,8 +48,21 @@ const Component = ({ pokemonDetail, pokemonSpeciesDetail }: Props) => {
         <p>分類：{pokemonDetail?.base_happiness}</p>
         <p>捕まえやすさ：{pokemonDetail?.capture_rate}</p>
         <p>初期のなつき度：{pokemonDetail?.base_happiness}</p>
-        <p>伝説のポケモン：{pokemonDetail?.is_legendary ? 'はい' : 'いいえ'}</p>
-        <p>幻のポケモン：{pokemonDetail?.is_mythical ? 'はい' : 'いいえ'}</p>
+        {/* 該当ポケモン：zapdos */}
+        <p
+          className={clsx({
+            [styles.legendary]: pokemonDetail?.is_legendary,
+          })}
+        >
+          伝説のポケモン：{pokemonDetail?.is_legendary ? 'はい' : 'いいえ'}
+        </p>
+        <p
+          className={clsx({
+            [styles.mythical]: pokemonDetail?.is_mythical,
+          })}
+        >
+          幻のポケモン：{pokemonDetail?.is_mythical ? 'はい' : 'いいえ'}
+        </p>
       </StyledContainer>
     </>
   );
