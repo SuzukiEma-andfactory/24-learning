@@ -5,7 +5,7 @@ import {
 } from '@/hooks/rest/usePokemonDetails';
 import { clsx } from 'clsx';
 import styles from './style.module.css';
-import { StyledContainer } from './styled';
+import { LegendOrMythical, StyledContainer } from './styled';
 
 // type Props = {
 //   pokemonDetail: PokemonDetailProps | undefined;
@@ -36,7 +36,6 @@ const Component = ({ pokemonDetail, pokemonSpeciesDetail }: Props) => {
         <p>能力：{pokemonDetail?.abilities?.join(', ')}</p>
         <p>生息地：{pokemonSpeciesDetail?.habitat}</p>
         <p>捕獲率：{pokemonSpeciesDetail?.capture_rate}%</p> */}
-
         {/* graphql */}
         <p>{pokemonDetail?.name}</p>
         <img
@@ -48,21 +47,36 @@ const Component = ({ pokemonDetail, pokemonSpeciesDetail }: Props) => {
         <p>分類：{pokemonDetail?.base_happiness}</p>
         <p>捕まえやすさ：{pokemonDetail?.capture_rate}</p>
         <p>初期のなつき度：{pokemonDetail?.base_happiness}</p>
+        {/* clsxライブラリを使ってクラス名を切り替える */}
         {/* 該当ポケモン：zapdos */}
-        <p
+        {/* <p
           className={clsx({
             [styles.legendary]: pokemonDetail?.is_legendary,
           })}
         >
           伝説のポケモン：{pokemonDetail?.is_legendary ? 'はい' : 'いいえ'}
-        </p>
-        <p
+        </p> */}
+        {/* 該当ポケモン：Mew */}
+        {/* <p
           className={clsx({
             [styles.mythical]: pokemonDetail?.is_mythical,
           })}
         >
           幻のポケモン：{pokemonDetail?.is_mythical ? 'はい' : 'いいえ'}
-        </p>
+        </p> */}
+
+        {/* propsでスタイルを動的に変える */}
+        <LegendOrMythical
+          isLegendary={pokemonDetail?.is_legendary}
+        >
+          伝説のポケモン：{pokemonDetail?.is_legendary ? 'はい' : 'いいえ'}
+        </LegendOrMythical>
+
+        <LegendOrMythical
+          isMythical={pokemonDetail?.is_mythical}
+        >
+          幻のポケモン：{pokemonDetail?.is_mythical ? 'はい' : 'いいえ'}
+        </LegendOrMythical>
       </StyledContainer>
     </>
   );
