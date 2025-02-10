@@ -1,7 +1,9 @@
-import List from '@/components/List';
+import Layout from '@/components/Layout';
 import usePokemonIndex from '@/hooks/graphql/usePokemonIndex';
+import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import { styled } from 'styled-components';
+import { getSortedPostsData } from '../lib/posts';
 
 // const geistSans = localFont({
 //   src: './fonts/GeistVF.woff',
@@ -18,7 +20,24 @@ const StyledContainer = styled.div`
   padding: 40px;
 `;
 
-export default function Home() {
+type PostData = {
+  id: string;
+};
+
+type Props = {
+  allPostsData: PostData[];
+};
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const allPostsData = getSortedPostsData();
+  return {
+    props: {
+      allPostsData,
+    },
+  };
+};
+
+export default function Home({ allPostsData }: any) {
   let id: number = 1;
   const router = useRouter();
 
@@ -50,8 +69,38 @@ export default function Home() {
     //     {/* <button onClick={handleUrlUpdate}>画面遷移なしでURL更新</button> */}
     //   </main>
     // </div>
-    <StyledContainer>
-      <List items={pokemonList}></List>
-    </StyledContainer>
+    // <StyledContainer>
+    //   <List items={pokemonList}></List>
+    // </StyledContainer>
+
+    <Layout>
+      {/* Keep the existing code here */}
+
+      {/* Add this <section> tag below the existing <section> tag */}
+      <section>
+        <h2>Blog</h2>
+        <ul>
+          {allPostsData.map(
+            ({
+              id,
+              date,
+              title,
+            }: {
+              id: number;
+              date: string;
+              title: string;
+            }) => (
+              <li key={id}>
+                {title}
+                <br />
+                {id}
+                <br />
+                {date}
+              </li>
+            )
+          )}
+        </ul>
+      </section>
+    </Layout>
   );
 }
