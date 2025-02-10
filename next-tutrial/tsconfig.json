@@ -19,6 +19,6 @@
     },
     "types": ["graphql-tag"]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/posts/[id].js"],
   "exclude": ["node_modules"]
 }
