@@ -1,6 +1,8 @@
 import fs from 'fs';
 import matter from 'gray-matter';
 import path from 'path';
+import { remark } from 'remark';
+import html from 'remark-html';
 
 // Markdownファイルを解析してタイトル・日付・ファイル名を取得し、それを日付順にソートして一覧ページに表示する処理
 const postsDirectory = path.join(process.cwd(), 'src/posts');
@@ -60,16 +62,23 @@ export function getAllPostIds() {
   });
 }
 
-export function getPostData(id) {
+export async function getPostData(id) {
   const fullPath = path.join(postsDirectory, `${id}.md`);
   const fileContents = fs.readFileSync(fullPath, 'utf8');
 
   // Use gray-matter to parse the post metadata section
   const matterResult = matter(fileContents);
 
-  // Combine the data with the id
+  // Use remark to convert markdown into HTML string
+  const processedContent = await remark()
+    .use(html)
+    .process(matterResult.content);
+  const contentHtml = processedContent.toString();
+
+  // Combine the data with the id and contentHtml
   return {
     id,
+    contentHtml,
     ...matterResult.data,
   };
 }
