@@ -44,7 +44,7 @@ const Component = ({ pokemonDetail, pokemonSpeciesDetail }: Props) => {
           width={imageSize}
           height={imageSize}
         />
-        <p>分類：{pokemonDetail?.base_happiness}</p>
+        <p>初期のなつき度：{pokemonDetail?.base_happiness}</p>
         <p>捕まえやすさ：{pokemonDetail?.capture_rate}</p>
         <p>初期のなつき度：{pokemonDetail?.base_happiness}</p>
         {/* clsxライブラリを使ってクラス名を切り替える */}
@@ -66,15 +66,11 @@ const Component = ({ pokemonDetail, pokemonSpeciesDetail }: Props) => {
         </p> */}
 
         {/* propsでスタイルを動的に変える */}
-        <LegendOrMythical
-          isLegendary={pokemonDetail?.is_legendary}
-        >
+        <LegendOrMythical isLegendary={pokemonDetail?.is_legendary}>
           伝説のポケモン：{pokemonDetail?.is_legendary ? 'はい' : 'いいえ'}
         </LegendOrMythical>
 
-        <LegendOrMythical
-          isMythical={pokemonDetail?.is_mythical}
-        >
+        <LegendOrMythical isMythical={pokemonDetail?.is_mythical}>
           幻のポケモン：{pokemonDetail?.is_mythical ? 'はい' : 'いいえ'}
         </LegendOrMythical>
       </StyledContainer>
