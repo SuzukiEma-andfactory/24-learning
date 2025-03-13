@@ -3,6 +3,12 @@ const nextConfig = {
   reactStrictMode: true,
   images: {
     domains: ['raw.githubusercontent.com'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'user0514.cdnw.net',
+      },
+    ],
   },
   async redirects() {
     return [
